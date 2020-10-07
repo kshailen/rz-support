@@ -1,0 +1,61 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:/aws/lambda/vpcFlowLogsProcessor:*",
+                "arn:aws:logs:*:*:log-group:/aws/lambda/cloudwatchLogsProcessor:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:StackSet-AWS-Landing-Zone*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": [
+                "arn:aws:iam::*:role/BKI-SR-CloudWatchToSplunk"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "iam:PassedToService": [
+                        "lambda.amazonaws.com",
+                        "cloudwatch.amazonaws.com"
+                    ]
+                }
+            }
+        },
+		{
+            "Effect": "Allow",
+            "Action": [
+                "s3:AbortMultipartUpload",
+                "s3:GetBucketLocation",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:ListBucketMultipartUploads",
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bki-hopsdev-centralized-cwlogs/*",
+                "arn:aws:s3:::bki-hopsdev-centralized-cwlogs",
+                "arn:aws:s3:::bki-log-archive-centralized-cwlogs-us-east-1",
+                "arn:aws:s3:::bki-log-archive-centralized-cwlogs-us-east-2"
+            ]
+        }
+    ]
+}
