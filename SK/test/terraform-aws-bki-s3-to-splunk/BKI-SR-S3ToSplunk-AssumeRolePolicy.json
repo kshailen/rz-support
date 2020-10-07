@@ -1,0 +1,12 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": ["logs.us-east-1.amazonaws.com","logs.us-east-2.amazonaws.com","lambda.amazonaws.com","ec2.amazonaws.com","s3.amazonaws.com","cloudwatch.amazonaws.com","vpc-flow-logs.amazonaws.com"]
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
